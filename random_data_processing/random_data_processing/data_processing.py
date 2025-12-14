@@ -55,6 +55,9 @@ class Dataprocessing(Node):
         s = 'Received data, Distance measured: ' + str(msg.data)
         self.get_logger().info(s)
 
+        s = "Predicted distance covered  : "+str(self.total_dist + self.w*msg.data + self.b)
+       	self.get_logger().info(s)
+
     def heavy_processing_task(self, x_data, y_data):
         self.get_logger().warn(f"LOCKED & LOADED. Processing {len(x_data)} items...")
         
@@ -103,9 +106,6 @@ class Dataprocessing(Node):
         
         s = 'Receives data, Velocity measured: ' + str(msg.data)
         self.get_logger().info(s)
-        
-       	s = "Predicted distance covered  : "+str(self.total_dist + (self.w-1)*msg.data + self.b)
-       	self.get_logger().info(s)
        	
         if should_process:
             self.heavy_processing_task(batch_X, batch_Y)
