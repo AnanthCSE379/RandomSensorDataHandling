@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>random_data_processing</name>
+  <version>1.0.0</version>
+  <description>This package will act like a broken sensor sending data to a ROS2 network of nodes.One node generates the random data using random library and pass it onto the ROS2 network to test the robustness of the given ROS2 network </description>
+  <maintainer email="iamanantharamakrishnan.s@gmail.com">ubuntu</maintainer>
+  <license>Apache-2.0</license>
+  
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>random</exec_depend>
+  <exec_depend>pandas</exec_depend>
+  <exec_depend>time</exec_depend>
+  <exec_depend>threading</exec_depend>
+  <exec_depend>scikit-learn</exec_depend>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+	
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
