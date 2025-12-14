@@ -11,6 +11,8 @@
 
 Standard filters (like Kalman filters) often rely on static parameters. This project implements an **Online Machine Learning** approach using Stochastic Gradient Descent (SGD) to dynamically learn the noise patterns of a sensor in real-time. 
 
+Assume a distance measuring sensor which outputs noisy data of distance measured from a wall to the robot as the robot moves away accelerating and decelerating constantly, the goal here is to remove the noise from the measurement to obtain the actual distance measured.
+
 To ensure the robot never "freezes" while training the model, the system utilizes a custom **Multithreaded Architecture** with `ReentrantCallbackGroups` and atomic locking, allowing it to process heavy mathematical operations on a background thread while continuing to receive high-frequency sensor data.
 
 ---
