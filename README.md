@@ -2,10 +2,10 @@
 This is a ROS2 project which will have one node simulate random sensor data from a distance measuring sensor such as ultrasonic sensor and another node which will try to determine the actual value of the sensor using machine learning algorithms.
 
 # Tech Stack Used 
--ROS2 Humble
--Python
--ScikitLearn
--Pandas 
+ - ROS2 Humble
+ - Python
+ - ScikitLearn
+ - Pandas 
 
 # Prerequisites 
 -A ROS2 Node is an Object in a ROS2 network which performs an action, it can either publish data or obtain data, the data is published to a "Topic" which is essentially allows ROS2 Nodes to subscribe to obtain data / publishing data. 
