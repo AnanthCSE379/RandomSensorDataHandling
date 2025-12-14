@@ -127,8 +127,4 @@ In the **Processor** terminal, you should see logs like:
 2.  **Hyperparameters:** The learning rate (`eta0`) is currently static. An adaptive learning rate would improve convergence in highly variable environments.
 3.  **Data Sync:** The system assumes a loose temporal correlation between the sensor and odometry messages arriving within the same batch window.
 
-## 📜 License
 
-This project is open-source and available under the MIT License.
-
-```
