@@ -37,14 +37,18 @@ class Dataprocessing(Node):
         self.measured_storage = []
         self.actual_storage = []
         self.data_lock = threading.Lock() 
-        self.model = SGDRegressor(max_iter=1, warm_start=True, tol=None, penalty='l2', eta0=0.01, random_state=42)
+        self.model = SGDRegressor(max_iter=1, warm_start=True, tol=None, penalty='l2', eta0=0.00001, random_state=42)
         self.total_dist = 0
+        self.b = 0
+        self.w = 1
+        self.model.coef_ = np.array([float(self.w)])
+        self.model.intercept_ = np.array([float(self.b)])
 
     def distance_measured(self, msg):
         # Only lock while appending to the list
         with self.data_lock:
             self.measured_storage.append(msg.data)
-            if len(self.measured_storage) >= 50:
+            if len(self.measured_storage) >= 10:
                 temp = "Actual len : " + str(len(self.actual_storage)) + " Measured len : " + str(len(self.measured_storage))
                 self.get_logger().info(temp)
 
@@ -54,19 +58,23 @@ class Dataprocessing(Node):
     def heavy_processing_task(self, x_data, y_data):
         self.get_logger().warn(f"LOCKED & LOADED. Processing {len(x_data)} items...")
         
+        print(x_data)
+        print(y_data)
         X = np.array(x_data).reshape(-1, 1)
         y = np.array(y_data)
 
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
         
-        print(X_train)
-        print(y_train)
         # 4. Train
         self.model.partial_fit(X_train, y_train)
         y_pred = self.model.predict(X_test)
         
         print("Test Values:", y_test)
         print("Predictions:", y_pred)
+        
+        self.b = self.model.intercept_
+        self.w = self.model.coef_
+        
         self.get_logger().info(f"==== PROCESSED====")
 
     def odometry_measured(self, msg):
@@ -80,7 +88,7 @@ class Dataprocessing(Node):
             
             current_length = len(self.actual_storage)
             
-            if current_length >= 50:
+            if current_length >= 10:
                 temp = "Actual len : " + str(len(self.actual_storage)) + " Measured len : " + str(len(self.measured_storage))
                 self.get_logger().info(temp)
                 
@@ -96,6 +104,9 @@ class Dataprocessing(Node):
         s = 'Receives data, Velocity measured: ' + str(msg.data)
         self.get_logger().info(s)
         
+       	s = "Predicted distance covered  : "+str(self.total_dist + (self.w-1)*msg.data + self.b)
+       	self.get_logger().info(s)
+       	
         if should_process:
             self.heavy_processing_task(batch_X, batch_Y)
 
