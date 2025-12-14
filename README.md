@@ -9,7 +9,9 @@ This is a ROS2 project which will have one node simulate random sensor data from
 
 # Prerequisites 
 -A ROS2 Node is an Object in a ROS2 network which performs an action, it can either publish data or obtain data, the data is published to a "Topic" which is essentially allows ROS2 Nodes to subscribe to obtain data / publishing data. 
+
 -Scikitlearn is a Machine learning library in Python which contains various types of machine learning algorithms which can be used. 
+
 -Pandas is a Data processing library in Python which allows us to process data which will be given to a machine learning model, useful for ensuring our model gets clean data to train upon. 
 
 # Working 
