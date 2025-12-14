@@ -28,7 +28,7 @@ To ensure the robot never "freezes" while training the model, the system utilize
 
 * **Framework:** ROS 2 Humble
 * **Language:** Python 3.10+
-* **Machine Learning:** Scikit-Learn (`SGDRegressor`, `StandardScaler`)
+* **Machine Learning:** Scikit-Learn (`SGDRegressor`)
 * **Data Processing:** NumPy
 * **Concurrency:** Python `threading`, ROS 2 Executors
 
@@ -124,7 +124,7 @@ In the **Processor** terminal, you should see logs like:
 ## ⚠️ Limitations
 
 1.  **Latency:** If the robot moves significantly faster than the model can train (processing time \> data arrival rate), the predictions may lag behind the current state.
-2.  **Hyperparameters:** The learning rate (`eta0`) is currently static. An adaptive learning rate would improve convergence in highly variable environments.
+2.  **Hyperparameters:** The learning rate is currently static. An adaptive learning rate would improve convergence in highly variable environments.
 3.  **Data Sync:** The system assumes a loose temporal correlation between the sensor and odometry messages arriving within the same batch window.
 
 
